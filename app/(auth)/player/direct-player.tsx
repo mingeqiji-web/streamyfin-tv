@@ -1890,6 +1890,8 @@ export default function DirectPlayerPage() {
                   playMethod={playMethod}
                   transcodeReasons={transcodeReasons}
                   downloadedFiles={downloadedFiles}
+                  isZoomedToFill={isZoomedToFill}
+                  onZoomToggle={handleZoomToggle}
                 />
               ) : (
                 <Controls
