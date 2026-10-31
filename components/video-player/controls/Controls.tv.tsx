@@ -119,6 +119,10 @@ interface Props {
   playMethod?: "DirectPlay" | "DirectStream" | "Transcode";
   transcodeReasons?: string[];
   downloadedFiles?: DownloadedItem[];
+  /** Whether the video currently fills the screen instead of being letterboxed. */
+  isZoomedToFill?: boolean;
+  /** Toggles zoom-to-fill; omit to hide the zoom control. */
+  onZoomToggle?: () => void;
 }
 
 const TV_SEEKBAR_HEIGHT = 14;
@@ -250,6 +254,8 @@ export const Controls: FC<Props> = ({
   playMethod,
   transcodeReasons,
   downloadedFiles,
+  isZoomedToFill = false,
+  onZoomToggle,
 }) => {
   const typography = useScaledTVTypography();
   const insets = useSafeAreaInsets();
@@ -1624,6 +1630,15 @@ export const Controls: FC<Props> = ({
               }
               size={24}
             />
+
+            {onZoomToggle && (
+              <TVControlButton
+                icon={isZoomedToFill ? "contract" : "expand"}
+                onPress={onZoomToggle}
+                focusable={showControls}
+                size={24}
+              />
+            )}
 
             {getTechnicalInfo && (
               <TVControlButton

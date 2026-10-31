@@ -317,6 +317,12 @@ class ExoPlayerView(context: Context, appContext: AppContext) : ExpoView(context
         )
         subtitleView = playerView.subtitleView
         addView(playerView)
+
+        // Belt-and-braces: the XML already asks for FIT, but the TV build has
+        // shipped with a filled surface before. Setting it again on the view
+        // guarantees the AspectRatioFrameLayout letterboxes from the first
+        // frame, whatever the theme/inflater did to the attribute.
+        playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
     }
 
     /**
